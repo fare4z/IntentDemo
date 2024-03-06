@@ -11,8 +11,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText etUrl;
-    Button btnGo;
+    EditText etUrl, etName;
+    Button btnGo, btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,17 +21,31 @@ public class MainActivity extends AppCompatActivity {
 
         etUrl = findViewById(R.id.etUrl);
         btnGo = findViewById(R.id.btnGo);
+        etName = findViewById(R.id.etName);
+        btnSubmit = findViewById(R.id.btnSubmit);
+
 
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 String url = etUrl.getText().toString().trim();
                 if (!url.isEmpty()) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(etUrl.getText().toString()));
                     startActivity(intent);
                 }
+
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = etName.getText().toString();
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                intent.putExtra("key_name", name);
+                startActivity(intent);
+
 
             }
         });
